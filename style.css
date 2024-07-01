@@ -1,0 +1,266 @@
+:root {
+    --primary-color: #007BFF;
+    --primary-hover: #FFD700;
+    --selected-color: #FFD700;
+    --occupied-color: #d9534f;
+    --occupied-hover: #c9302c;
+    --free-color: #4CAF50;
+    --free-hover: #45a049;
+    --background-color: #;
+    --button-width: 90%;
+    --button-height: auto;
+    --button-font-size: 1em;
+    --seat-size: 65px; /* Tamaño de los asientos */
+    --seat-size-mobile: 7vw; /* Tamaño de los asientos para móviles */
+    --seat-gap: 5px; /* Espacio entre los asientos en escritorio */
+    --seat-gap-mobile: 5px; /* Espacio entre los asientos en móviles */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: var(--background-color);
+    margin: 0;
+}
+
+header, main {
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+#zones {
+    margin: 20px 0;
+}
+
+.zone-button, button {
+    padding: 25px 35px;
+    margin: 5px;
+    font-size: var(--button-font-size);
+    cursor: pointer;
+    border: none;
+    border-radius: 30px; 
+    background-color: var(--primary-color);
+    color: white;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    width: var(--button-width);
+    max-width: 150px; /* Para evitar que los botones sean demasiado grandes */
+    height: var(--button-height);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.zone-button:hover, button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.selected-zone {
+    background-color: var(--selected-color);
+    color: black;
+}
+
+#auditorium {
+    display: none;
+    gap: var(--seat-gap);
+    justify-content: center;
+    margin: 20px 0;
+    /* Configuración de cuadrícula para escritorio */
+    grid-template-columns: repeat(auto-fit, minmax(var(--seat-size), 1fr));
+}
+
+.seat {
+    width: var(--seat-size);
+    height: var(--seat-size);
+    background-color: var(--free-color);
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.seat:hover {
+    background-color: var(--free-hover);
+}
+
+.occupied {
+    background-color: var(--occupied-color);
+}
+
+.occupied:hover {
+    background-color: var(--occupied-hover);
+}
+
+
+.seat.needs-special {
+    background-color: #0077ff;
+}
+
+.seat.needs-special.occupied {
+    background-color: #0077ff;
+}
+
+
+.small-button {
+    padding: 1px 5px;
+    margin: 5px;
+    font-size: 0.8em;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    background-color: #494948;
+    color: white;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.small-button:hover {
+    background-color: #494948;
+}
+
+.small-button.active {
+    background-color: #0011ff;
+}
+
+#buttonContainer {
+    display: none; 
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#passwordSection {
+    margin-top: 20px;
+}
+
+#errorMessage {
+    color: red;
+    display: none; 
+    margin-top: 10px;
+}
+
+
+
+#summary {
+    font-size: 1em;
+    margin: 20px 0;
+}
+
+/* Estilos para botones */
+button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+}
+
+button.selected-zone {
+    background-color: #FFD700;
+    color: #000000;
+}
+
+button.active {
+    background-color: #242424;
+    color: white;
+}
+
+
+@media (max-width: 768px) {
+    button {
+        font-size: 14px;
+        padding: 8px;
+        margin: 3px;
+    }
+
+    #buttonContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+#toggleSpecialButton, #removeSeatsButton, #restoreSeatsButton {
+    width: 100%;
+}
+
+#resetButton, #overallSummaryButton {
+    width: 100%;
+}
+
+/* Estilos para asiento inactivo */
+.inactive {
+    visibility: hidden;
+}
+/*Para modo nocturno*/
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode .seat {
+    background-color: var(--free-hover);
+    border-color: #555;
+}
+
+.dark-mode .seat.occupied {
+    background-color: #c9302c;
+}
+
+.dark-mode .seat.needs-special {
+    background-color: #0077ff;
+}
+
+.dark-mode .seat.inactive {
+    background-color: #2c3e50;
+}
+
+.dark-mode .selected-zone {
+    background-color: #FFD700;
+    color: #000000;
+}
+
+.dark-mode #buttonContainer {
+    background-color: #121212;
+    border-color: #333;
+}
+
+.dark-mode button {
+    background-color: #444;
+    color: white;
+    border-color: #555;
+}
+
+.dark-mode button.active {
+    background-color: #FFD700;
+    color: #000000;
+}
+
+
+@media (max-width: 600px) {
+    :root {
+        --button-width: 80%;
+        --button-font-size: 0.9em;
+        --seat-size: var(--seat-size-mobile); /* Tamaño de asientos para móviles */
+        --seat-gap: var(--seat-gap-mobile); /* Espacio entre los asientos en móviles */
+    }
+
+    main {
+        margin: 10px;
+    }
+
+    header, #zones {
+        margin: 10px 0;
+    }
+
+    #auditorium {
+        /* Configuración de cuadrícula para móviles */
+        grid-template-columns: repeat(auto-fill, minmax(var(--seat-size), 1fr));
+    }
+}
